@@ -3,10 +3,15 @@ import numpy as np
 import sqlite3
 from tkinter import *
 import tkinter as tk
+
+#### DATABASE SECTION ##########################################################
+
 connection = sqlite3.connect("Whales.db")
 cursor = connection.cursor()
 
-
+"""This program creates a database of whales and the bodies of water in which the reside. It
+also creates a GUI interface that will allow the user to insert information about the whales into
+the whales table."""
 
 try:
     cursor.execute("""CREATE TABLE Waters ("Name_" varchar(20), "AveDepth" int, "SaltOrFresh" Varchar(1), PRIMARY KEY ("Name_"));""")
@@ -111,6 +116,9 @@ try:
     cursor.execute("""INSERT INTO Waters (Name_,AveDepth,SaltOrFresh) VALUES ("Great_Lakes", 1000, "F");""")
 except:
     print("This record already exists")
+
+#### GUI SECTION ############################################################
+
 class GUI:
     def __init__(self):
         self.main_window = tk.Tk()
@@ -229,6 +237,8 @@ G = GUI()
 
 #to commit the execute statements above to the database
 connection.commit()
+
+#### QUERY SECTION ##########################################################
 
 #select all the records from the Whales table
 cursor.execute("SELECT * FROM Whales;")
